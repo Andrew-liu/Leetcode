@@ -29,3 +29,20 @@ public:
         return val1 == val2 ? true : false;
     }
 };
+
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if (!p && !q) {  //两个极点都为空
+            return true;
+        }
+        if (!p || !q) {  //一个节点为空, 一个节点不为空
+            return false;
+        }
+        // 两个节点都不为空, 则考虑他的左右子节点
+        return (p->val == q->val) && isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+    }
+    bool isEqual(int val1, int val2) {
+        return val1 == val2 ? true : false;
+    }
+};
