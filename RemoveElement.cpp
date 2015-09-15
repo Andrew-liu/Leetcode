@@ -15,3 +15,16 @@ public:
         return nums.size();
     }
 };
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int offset = 0;
+        for(auto num : nums) {
+            if (num != val) {
+                nums[offset++] = num;  // 如果不相等, 直接赋值, offset加一, 如果相等, 则什么都不做, 则下一个不相等元素就会覆盖到相等的元素
+            }
+        }
+        return offset;
+    }
+};
