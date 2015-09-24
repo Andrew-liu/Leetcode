@@ -23,7 +23,7 @@ public:
             int mid = (left + right) / 2;
             if(nums[mid] == target) {
                 return mid;
-            } 
+            }
             if (left < mid && nums[mid] > target && nums[mid - 1] < target) {
                 return mid;  //处在数组中某两个数中间
             }
@@ -37,6 +37,5 @@ public:
             left = nums.size();
         }
         return left;
-        
     }
 };
