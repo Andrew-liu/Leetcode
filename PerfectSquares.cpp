@@ -1,3 +1,16 @@
+class Solution {
+public:
+    int numSquares(int n) {
+        vector<int> temp(n + 1, INT_MAX);
+        temp[0] = 0;
+        for(int i = 0; i <= n; ++i) {
+            for(int j = 1; i + j * j <= n; ++j) {
+                temp[i + j * j] = min(temp[i + j * j], temp[i] + 1);
+            }
+        }
+        return temp.back();
+    } 
+};
 /*
 基础概念
 1. 四平方和定理: 任何一个数都可以表示为四个整数的平方和
