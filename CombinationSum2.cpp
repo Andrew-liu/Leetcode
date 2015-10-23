@@ -17,7 +17,7 @@ public:
             return;
         }
         for(int i = start; i < candidates.size(); ++i) {
-            if(i > start && candidates[i] == candidates[i - 1]) {
+            if(i > start && candidates[i] == candidates[i - 1]) {  // 去重复解
                 continue;
             }
             if(candidates[i] <= target) {
