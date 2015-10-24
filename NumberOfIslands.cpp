@@ -1,3 +1,4 @@
+// 整个是一片1的点, 算作一个岛屿, 只判断上下左右四个方向
 class Solution {
 public:
     int numIslands(vector<vector<char>>& grid) {
