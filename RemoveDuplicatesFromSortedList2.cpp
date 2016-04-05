@@ -65,6 +65,32 @@ public:
     }
 };
 
+// 更简便的解法, 注意防止内存泄露
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if (!head || !head->next) {
+            return head;
+        }
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode* cur = dummy;
+        while(cur->next != NULL && cur->next->next != NULL) {
+            if(cur->next->val == cur->next->next->val) {
+                int cur_val = cur->next->val;
+                while(cur->next != NULL && cur->next->val == cur_val){
+                    cur->next = cur->next->next;
+                }
+            } else {
+                cur = cur->next;
+            }
+        }
+        cur = dummy->next;
+        delete dummy;
+        return cur;
+    }
+};
+
 int main(int argc, const char *argv[])
 {
     ListNode first(1);
