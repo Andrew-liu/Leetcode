@@ -37,3 +37,39 @@ public:
         return head;
     }
 };
+
+
+// 只需要使用一个新的节点存储小于x的节点, 剩下的保存在原链表中, 使用哑节点记录原链表的起点
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        if(head == NULL) {
+            return NULL;
+        }
+        ListNode* smaller = new ListNode(0);
+        ListNode* dummy = new ListNode(0);  // 用来记录旧链表的其实
+        dummy->next = head;
+        ListNode* cur = dummy;
+        ListNode* tmp = smaller;
+        while(cur->next) {
+            if (cur->next->val < x) {
+                tmp->next = cur->next;
+                tmp = tmp->next;
+                cur->next = cur->next->next;
+            } else {
+                cur = cur->next;
+            }
+        }
+        tmp->next = dummy->next;
+        delete dummy;
+        return smaller->next;
+    }
+};
