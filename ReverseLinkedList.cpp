@@ -32,3 +32,22 @@ public:
         return head;
     }
 };
+// 更加清晰的方法, 不用考虑最后一次循环
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head == NULL){
+            return NULL;
+        }
+        ListNode* cur = head;
+        ListNode* pre = NULL;
+        ListNode* lst = NULL;
+        while(cur) {
+            lst = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = lst;
+        }
+        return pre;
+    }
+};
