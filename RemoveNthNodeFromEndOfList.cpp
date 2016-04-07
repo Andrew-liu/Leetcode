@@ -35,3 +35,26 @@ public:
         return head;
     }
 };
+
+//更好的解法, 使用快慢指针
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if(head == NULL) {
+            return NULL;
+        }
+        ListNode* dummy = new ListNode(0);  //可能删除头结点
+        dummy->next = head;
+        ListNode* fast = dummy;
+        ListNode* slow = dummy;
+        while(n--) {
+            fast = fast->next;
+        }
+        while(fast && fast->next) {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        slow->next = slow->next->next;
+        return dummy->next;
+    }
+};
