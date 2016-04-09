@@ -47,6 +47,34 @@ public:
     }
 };
 
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(head == NULL || head->next == NULL) {
+            return head;
+        }
+        ListNode* dummy = new ListNode(1);
+        ListNode* pre = dummy;
+        ListNode* tmp = NULL;
+        ListNode* cur1 = head;
+        ListNode* cur2 = head->next;
+        while(cur2) {
+           tmp = cur2->next;
+           pre->next = cur2;
+           cur2->next = cur1;
+           cur1->next = tmp;
+           if(tmp == NULL) { //偶数个节点则终止循环
+               break;
+           } else {
+               pre = cur1;
+               cur1 = tmp;
+               cur2 = tmp->next;
+           }
+        }
+        return dummy->next;
+    }
+};
+
 int main(int argc, char** argv) {
     ListNode first(1);
     ListNode second(2);
