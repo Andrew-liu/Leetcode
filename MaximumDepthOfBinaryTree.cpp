@@ -8,6 +8,9 @@
  * };
  */
 class Solution {
+/*
+ * 使用反推到的思想, 从树最底层节点来分析整个递归的流程.
+ */
 public:
     int maxDepth(TreeNode* root) {
         if (root == NULL) {
