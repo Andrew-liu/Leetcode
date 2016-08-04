@@ -22,15 +22,15 @@ public:
         if (root == NULL) { //根节点的深度为0
             return 0;
         }
-        int left_depth = findDepth(root->left);  // 左子树的深入
+        int left_depth = findDepth(root->left);  // 左子树的深度
         if (left_depth == -1) {
             return -1;
         }
-        int right_depth = findDepth(root->right);
+        int right_depth = findDepth(root->right);  //右子树的深度
         if (right_depth == -1) {
             return -1;
         }
-        if (abs(left_depth - right_depth) > 1) {
+        if (abs(left_depth - right_depth) > 1) {  // 自底向上求每个节点左右深度是否平衡
             return -1;
         }
         return max(left_depth, right_depth) + 1; //叶子0点返回深度(高度)为0, 而实际高度应该为1
