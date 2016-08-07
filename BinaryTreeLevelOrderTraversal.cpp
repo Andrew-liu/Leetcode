@@ -1,62 +1,39 @@
-#include <iostream>
-#include <queue>
-#include <vector>
-#include <algorithm>
-using namespace std;
-
 /**
  * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
  */
- struct TreeNode {
-     int val;
-     TreeNode *left;
-     TreeNode *right;
-     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- };
- // 广度优先遍历
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector <int> > res;
-        vector<int> lvl;
-        if(root == NULL)
+        vector<vector<int> > res;
+        if (root == NULL) {  // 空树的情况
             return res;
-        queue <TreeNode*> st_par, st_chi; //一个用于存放父节点, 一个用于存放子节点
-        TreeNode* curr = root;
-        st_par.push(curr);
-        while(!st_par.empty()){
-            curr = st_par.front();
-            st_par.pop();
-            if(curr->left)
-                st_chi.push(curr->left);
-            if(curr->right)
-                st_chi.push(curr->right);
-            lvl.push_back(curr->val);
-            if(st_par.empty()){
-                while(!st_chi.empty()){  //将子队列的节点写入到父队列中z
-                    st_par.push(st_chi.front());
-                    st_chi.pop();
-                }
-                res.push_back(lvl);
-                lvl.clear();
+        }
+        queue<TreeNode*> parent_q, child_q;
+        parent_q.push(root);  //父队列来缓存的当前遍历层的节点
+        vector<int> temp; //记录一层的值
+        while(!parent_q.empty()) {
+            TreeNode* temp_node = parent_q.front();
+            parent_q.pop();
+            temp.push_back(temp_node->val);
+            // 当左子树或者右子树不为空时, 则队列继续遍历
+            if (temp_node->left != NULL) { 
+                child_q.push(temp_node->left);
+            }
+            if (temp_node->right != NULL) {
+                child_q.push(temp_node->right);
+            }
+            if(parent_q.empty()) {  // 父队列为空时,表示当前层遍历结束, 则清空temp vector,交换父子队列
+                res.push_back(temp);
+                temp.clear();
+                parent_q.swap(child_q); //父子queu交换元素, 此时子队列为空
             }
         }
         return res;
     }
 };
-
-int main(int argc, char** argv) {
-    TreeNode a(1);
-    TreeNode b(2);
-    TreeNode c(3);
-    a.left = &b;
-    a.right = &c;
-    Solution s;
-    vector<vector<int> > res =  s.levelOrder(&a);
-    for(auto num : res) {
-        for(auto f : num) {
-            cout << f << " ";
-        }
-        cout << endl;
-    }
-}
