@@ -7,27 +7,27 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
- 
- //思考考虑深度优先遍历DFS
+ // 通过题目分析, 可以使用深度优先遍历
 class Solution {
 public:
     bool hasPathSum(TreeNode* root, int sum) {
-        return isPathSum(root, sum, 0);
-        
+        return isSumExist(root, sum, 0);
     }
-    bool isPathSum(TreeNode* root, int sum, int temp) {
-        if (root == NULL) {  //根节点为空
+    // temp用于记录深度优先遍历中间累加和
+    bool isSumExist(TreeNode* root, int sum, int temp) {
+        if (root == NULL) {
             return false;
         }
         temp += root->val;
-        if(root->left == NULL && root->right == NULL) { //叶子节点
-            if(temp == sum) { //叶子节点时, 判断temp累加和和sum是否相等
+        // 深度优先遍历到达叶子节点
+        if (root->left == NULL && root->right == NULL) {
+            if (temp == sum) { // 到达叶子节点, 表示某一条路径深度优先遍历结束, 则判断当前temp是否等于sum
                 return true;
             } else {
                 return false;
             }
         }
-        //不是叶子节点继续递归的遍历
-        return isPathSum(root->left, sum, temp) || isPathSum(root->right, sum, temp);  //递归遍历
+        // 如果不是叶子节点, 则继续进行深度优先遍历(分别遍历左子树和右子树)
+        return isSumExist(root->left, sum, temp) || isSumExist(root->right, sum, temp);
     }
 };
