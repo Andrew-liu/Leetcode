@@ -26,6 +26,7 @@ public:
         if(l->val != r->val) {
             return false;  // 左右不为空, 但值不相同
         }
+        /*
         if(!isSym(l->left, r->right)) { //最左边和最右边比较是否对称
             return false;
         }
@@ -33,5 +34,7 @@ public:
             return false;
         }
         return true; // 表示对称
+        */
+        return isSym(l->left, r->right) && isSym(l->right, r->left); // 更加简单的解法, 两个判断必须同时成立, true才会返回
     }
 }; 
