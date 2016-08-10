@@ -14,7 +14,7 @@ public:
         if(root == NULL) {
             return NULL;
         }
-        // 交换当前节点的左右指针
+        // 交换当前节点的左右指针(不是只交换两个Node的值)
         TreeNode *temp = root->right;
         root->right = root->left;
         root->left = temp;
