@@ -38,3 +38,31 @@ public:
         }
     }
 };
+
+ // 回溯法当前节点的所有path已经都访问到了，返回前需要从path中删除当前节点，以便重新构建其他path
+ // 回溯法也是深度优先遍历
+class Solution {
+public:
+    vector<vector<int>> pathSum(TreeNode* root, int sum) {
+        vector<int> path; //单条路径
+        vector<vector<int> > paths;  //所有路径
+        helper(root, sum, path, paths);
+        return paths;
+    }
+    void helper(TreeNode* node, int sum, vector<int>& path, vector<vector<int> >& paths) {
+        if (node == NULL) {
+            return;
+        }
+        sum -= node->val;
+        path.push_back(node->val);
+        if (node->left == NULL && node->right == NULL) {
+            if (sum == 0) {
+                paths.push_back(path);
+            }
+        }
+        helper(node->left, sum, path, paths);
+        helper(node->right, sum, path, paths);
+        //回溯
+        path.pop_back();
+    }
+};
