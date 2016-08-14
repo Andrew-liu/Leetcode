@@ -15,7 +15,7 @@
 class Solution {
 public:
     bool isBalanced(TreeNode* root) {
-        return findDepth(root) == -1 ? false : true;
+        return findDepth(root) == -1 ? false : true;  // -1表示不是平衡树
     }
     
     int findDepth(TreeNode* root) {
@@ -23,7 +23,7 @@ public:
             return 0;
         }
         int left_depth = findDepth(root->left);  // 左子树的深度
-        if (left_depth == -1) {
+        if (left_depth == -1) { // 当左子树不平衡时, 没比用再判断右子树
             return -1;
         }
         int right_depth = findDepth(root->right);  //右子树的深度
