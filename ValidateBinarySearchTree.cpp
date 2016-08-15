@@ -37,3 +37,23 @@ public:
         return true;
     }
 };
+
+ // 使用递归解法
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        return isValidBST(root, numeric_limits<int>::min(), numeric_limits<int>::max());
+    }
+    bool isValidBST(TreeNode* root, int min_value, int max_value) {
+        // 节点为空, 表示为二叉查找树
+        if (root == NULL) {
+            return true;
+        }
+        // 当前节点的值小于最小值或者大于最大值, 则表示非二叉查找树
+        if (root->val <= min_value || root->val >= max_value) {  
+            return false;
+        }
+        // 否则, 继续递归遍历左右子节点
+        return isValidBST(root->left, min_value, root->val) && isValidBST(root->right, root->val, max_value);
+    }
+};
