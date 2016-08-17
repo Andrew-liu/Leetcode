@@ -6,24 +6,23 @@
  *     TreeNode *right;
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
- * 
- * 借用中序遍历的特性, 左, 中, 右
  */
+ // 使用二叉搜索树的特性: 在中度遍历时,会获得一个有序的数组, 可以直接O(1)得到第k小的元素
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
-        stack<TreeNode*> temp;
+        std::stack<TreeNode*> cache; //栈可以用于节点的向上回溯
         vector<int> res;
         TreeNode* cur = root;
-        while(cur || !temp.empty()) {
-            while(cur) {  // 所有左节点的遍历
-                temp.push(cur);
-                cur = cur->left;
+        while(cur || !cache.empty()) {
+            while (cur) {
+                cache.push(cur);
+                cur = cur->left; //一直向左遍历
             }
-            cur = temp.top();
-            temp.pop();
+            cur = cache.top();
+            cache.pop();
             res.push_back(cur->val);
-            cur = cur->right;  // 切换到右子树
+            cur = cur->right; //继续遍历当前节点的右子树
         }
         return res[k - 1];
     }
