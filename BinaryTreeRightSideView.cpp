@@ -7,7 +7,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
- //查看二叉树最右边的节点, 找的是每一层最右侧的节点. 直接递归的调用遍历右侧的节点的想法是错误的, 使用BFS的思路
+ // 基本思路, 层级遍历整颗树, 并将每一层最后一个节点的值保留下来
 class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
@@ -29,7 +29,7 @@ public:
             }
             if(first.empty()) {
                 res.push_back(cur->val);
-                first = second;
+                first.swap(second);
                 second = queue<TreeNode*>();
             }
         }
