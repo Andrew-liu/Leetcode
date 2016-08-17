@@ -27,8 +27,6 @@ public:
                 if(cur->left != NULL) {
                     buf.push(cur->left);
                 }
-                if(cur->right != NULL) {
-                    buf.push(cur->right);
                 }
             }
         }
@@ -45,17 +43,18 @@ public:
     int countNodes(TreeNode* root) {
         int lHeight = 0, rHeight = 0;
         TreeNode *leftNode = root, *rightNode = root;
-        while(leftNode != NULL) {
+        while(leftNode != NULL) {  // 遍历当前节点到最左节点的高度
             lHeight++;
             leftNode = leftNode->left;
         }
-        while(rightNode != NULL) {
+        while(rightNode != NULL) {  //遍历当前节点到最右节点的高度
             rHeight++;
             rightNode = rightNode->right;
         }
         if(lHeight == rHeight) {  //说明是满二叉树
             return pow(2, lHeight) - 1;
         }
-        return countNodes(root->left) + countNodes(root->right) + 1;
+        // 非满二叉树, 则不断的递归计算节点的总个数
+        return countNodes(root->left) + countNodes(root->right) + 1;  // 最后的1为根节点
     }
 };
