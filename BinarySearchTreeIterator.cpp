@@ -12,7 +12,8 @@
 class BSTIterator {
 public:
     BSTIterator(TreeNode *root) {
-        cur = root;
+        stack<TreeNode*> buffer;
+        TreeNode* cur = root;
         while(cur || !buffer.empty()) {  //中度优先遍历
             while(cur) {
                 buffer.push(cur);
@@ -32,13 +33,11 @@ public:
 
     /** @return the next smallest number */
     int next() {
-        cur = res.front();
+        TreeNode* cur = res.front();
         res.pop();
         return cur->val;
     }
 private:
-    TreeNode* cur;
-    stack<TreeNode*> buffer;
     queue<TreeNode*> res;
 };
 
