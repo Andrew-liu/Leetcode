@@ -27,7 +27,6 @@ public:
         } else {
             return;
         }
-        
         preorder(root->left, res);
         preorder(root->right, res);
     }
@@ -45,7 +44,6 @@ public:
  * 
  *  非递归的方式: (中->左->右), 当前节点不空, 则进入vector, 然后继续查看左节点入栈, 然后出现当前节点查看是否有右节点
  */
- 
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
@@ -54,14 +52,14 @@ public:
         TreeNode* cur = root;
         while(cur != NULL || !temp.empty()) {
             while(cur != NULL) {
-                res.push_back(cur->val);
+                res.push_back(cur->val);  // 中序遍历和先序遍历的区别就在这里, 遍历到每个节点先入队
                 temp.push(cur);
                 cur = cur->left;
             }
-            cur = temp.top();  //获取栈顶元素, 第一个为最左下角的节点
+            cur = temp.top();
             temp.pop();
             cur = cur->right;
         }
         return res;
     }
-};
+}; 
