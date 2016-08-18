@@ -24,7 +24,7 @@ public:
             return;
         }
         inorder(root->left, res);
-        res.push_back(root->val);
+        res.push_back(root->val);  // 注意在此处才将数据放入队列
         inorder(root->right, res);
     }
 };
