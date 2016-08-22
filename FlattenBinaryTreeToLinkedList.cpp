@@ -1,12 +1,4 @@
-/*
- * Author: Andrew Liu
- * Email: liu.bin.coder@gmail.com
- */
-#include <iostream>
-#include <string>
-using namespace std;
-/**
- * Definition for a binary tree node.
+tion for a binary tree node.
  * struct TreeNode {
  *     int val;
  *     TreeNode *left;
@@ -14,13 +6,13 @@ using namespace std;
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  * 
- *  前序遍历整个二叉树, 然后链起来, 使用stack回溯, 使用queue存储节点(先进先出)
+ *  前序遍历(中左右)整个二叉树, 然后链起来, 使用stack回溯, 使用queue(vector也可以)存储节点(先进先出)
  */
 class Solution {
 public:
     void flatten(TreeNode* root) {
         stack<TreeNode*> temp;
-        queue<TreeNode*> res;
+        queue<TreeNode*> res;  //或者用vector也是可以的
         if(root == NULL) {
             return;
         }
