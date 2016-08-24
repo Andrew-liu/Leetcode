@@ -19,7 +19,7 @@ public:
             return NULL;
         }
         int i = 0;
-        for (i = iLeft; i <= iRight; ++i) {  //找到中间的划分节点
+        for (i = iLeft; i <= iRight; ++i) {  //找到中间的划分节点(即为当前子树的根节点)
             if (preorder[pLeft] == inorder[i]) { 
                 break;
             }
