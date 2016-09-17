@@ -7,24 +7,27 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+ 
  /*
-  * 题目大意:给的是二叉搜索树，寻找其中两个给定节点的最近公共祖先（LCA）。
-  * 根据维基百科对LCA的定义：
-  * 节点v与w的最近公共祖先是树T上同时拥有v与w作为后继的最低节点（注意这句话: 允许将一个节点当做其本身的后继）
+  * idea: 如果一个节点左子树有两个目标节点中的一个，右子树没有，那这个节点肯定不是最小公共祖先。如果一个节点右子树有两个目标节点中的一个，左子树没有，那这个节点肯定也不是最小公共祖先。只有一个节点正好左子树有，右子树也有的时候，才是最小公共祖先。
   */
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (root == NULL) {
-            return NULL;
-        }
-        if (p->val < root->val && q->val < root->val) {
-            return lowestCommonAncestor(root->left, p, q);
-        } else if (p->val > root->val && q->val > root->val) {
-            return lowestCommonAncestor(root->right, p, q);
-        } else {
-            // 一个大于一个小于, 则公共祖先就是当前这个子树的根节点
+        // 发现目标节点则通过返回值标记该子树发现了某个目标结点
+        if(root == NULL || root == p || root == q) {
             return root;
         }
+        //查看左子树中是否有目标结点，没有为NULL.
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        //查看右子树是否有目标节点，没有为NULL
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+        
+        //都不为空，说明做右子树都有目标结点，则公共祖先就是本身
+        if(left != NULL && right != NULL) {
+            return root;
+        }
+        //如果发现了目标节点，则继续向上标记为该目标节点
+        return left == NULL ? right : left;
     }
 };
