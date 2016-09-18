@@ -20,12 +20,14 @@ public:
         }
         int i = 0;
         for (i = iLeft; i <= iRight; ++i) {  //找到中间的划分节点(即为当前子树的根节点)
-            if (preorder[pLeft] == inorder[i]) { 
+            if (preorder[pLeft] == inorder[i]) {  // 每次子树(先序)的最左节点都是当前子树的根节点
                 break;
             }
         }
         TreeNode *cur = new TreeNode(preorder[pLeft]);  //每次找到根节点, 然后递归的寻找左右子树的节点
+        // 对先序和中序分别找到左子树
         cur->left = buildTree(preorder, pLeft + 1, pLeft + i - iLeft, inorder, iLeft, i - 1);
+        // 对先序和中序分别找到右子树
         cur->right = buildTree(preorder, pLeft + i - iLeft + 1, pRight, inorder, i + 1, iRight);
         return cur;
     }
