@@ -17,10 +17,13 @@ public:
         if (iLeft > iRight || pLeft > pRight) return NULL;
         TreeNode *cur = new TreeNode(postorder[pRight]); //在后序遍历中, 最后的节点总是中间节点, 作为划分
         int i = 0;
+        // 在中序遍历中找到划分的节点, 用来分割左右子树
         for (i = iLeft; i < inorder.size(); ++i) {
             if (inorder[i] == cur->val) break;
         }
+        // 对中序和后序中的左子树进行递归的构建
         cur->left = buildTree(inorder, iLeft, i - 1, postorder, pLeft, pLeft + i - iLeft - 1);
+        // 对中序和后续的右子树进行递归的构建
         cur->right = buildTree(inorder, i + 1, iRight, postorder, pLeft + i - iLeft, pRight - 1);
         return cur;
     }
