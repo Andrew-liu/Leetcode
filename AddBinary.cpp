@@ -28,7 +28,28 @@ public:
         }
         return res;
     }
-    
+};
+
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        string result = "";
+        int max_size = max(a.size(), b.size());
+        reverse(a.begin(), a.end());
+        reverse(b.begin(), b.end());
+        int carry = 0;
+        for (int i = 0; i < max_size; ++i) {
+            int one = a.size() > i ? a[i] - '0' : 0;
+            int two = b.size() > i ? b[i] - '0' : 0;
+            int cur = (one + two + carry) % 2;
+            carry = (one + two + carry) / 2;
+            result.insert(result.begin(), cur + '0'); // 注意需要在首部插入char
+        }
+        if (carry == 1) {
+            result.insert(result.begin(), '1');
+        }
+        return result;
+    }
 };
 
 int main(int argc, char** argv) {
