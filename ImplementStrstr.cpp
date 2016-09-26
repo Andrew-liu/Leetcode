@@ -1,4 +1,5 @@
 // 土逼方法: 逐位比较, 不相等则比较的后移. 更优秀的想法KMP
+// 可以通过判断长度来减少比较的次数
 class Solution {
 public:
     int strStr(string haystack, string needle) {
