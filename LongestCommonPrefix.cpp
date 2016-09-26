@@ -1,3 +1,4 @@
+// 思路: 采用纵向计较的方法, 当字符串长度超过第一行或者字符不相等时, 返回公共的前缀即可
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
